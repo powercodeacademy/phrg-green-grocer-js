@@ -94,10 +94,11 @@ The function should return a cart with the clearance applied to peanut butter an
 
 Create a `checkout` function that calculates the total cost of the consolidated cart. When checking out, follow these steps in order:
 
-Apply coupon discounts if the proper number of items are present.
+* Apply coupon discounts if the proper number of items are present.
 * Apply a 20% discount if items are on clearance.
 * If, after applying the coupon and clearance discounts, the cart's total is over $100, then apply a 10% discount.
-* Named Parameters
+
+## Named Parameters
 
 In JavaScript, named parameters can be mimicked by destructuring objects passed as function arguments. This makes the code more expressive since you can see directly what each parameter is for. The order of parameters doesn't matter as long as the names match.
 
