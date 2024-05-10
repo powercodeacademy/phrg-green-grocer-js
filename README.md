@@ -80,7 +80,6 @@ For instance, if given this cart:
 }
 ```
 
-
 The function should return a cart with the clearance applied to peanut butter and soy milk:
 
 ```js
