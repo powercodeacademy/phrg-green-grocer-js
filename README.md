@@ -1,6 +1,6 @@
 # Pairing Project
 
-##The Plan
+## The Plan
 
 In this pairing lab, there is no designated point to switch roles. Instead, every 30 minutes, the pair should switch responsibilities; the driver should become the navigator, and the navigator becomes the driver.
 
