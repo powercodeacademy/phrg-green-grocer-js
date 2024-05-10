@@ -1,7 +1,9 @@
 const cartArray = [
   {"AVOCADO": {price: 3.0, clearance: true}},
   {"AVOCADO": {price: 3.0, clearance: true}},
+  {"KALE": {price: 3.0, clearance: false}},
   {"KALE": {price: 3.0, clearance: false}}
+
 ]
 //
 
@@ -10,19 +12,26 @@ const consolidateCart = (cart) => {
   // create a new object, 
   let newCart = {}
   //check each item is in the cart
-  let countValue = 1
+  
   cart.forEach(item => {
     //if item is in cart, count++ 
-    if (item in newCart){
-      countValue++
+    const itemName = Object.keys(item)[0]
+    if (itemName in newCart){
+      newCart[itemName].count += 1
     } else {
       //else if not in the cart, add it to the cart
-      newCart[Object.keys(item)[0]] = Object.values(item)[0] 
+      //get item values
+      let itemValues = Object.values(item)[0] 
+      //add count 1 to values
+      itemValues["count"] = 1
+            //assign values to object
+      newCart[Object.keys(item)[0]] = itemValues
     }
-    debugger
+    
   })
-  console.log(newCart)
-   debugger
+  return newCart
+  
+  
   //else if not in the cart, add it to the cart
   //cartObj = Object.assign({}, cart)
   
