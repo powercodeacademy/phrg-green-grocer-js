@@ -32,22 +32,22 @@ const consolidateCart = (cart) => {
 
 
 const applyCoupons = (cart, coupons) => {
-  let consolidatedCart = cart
+ 
   coupons.forEach((itemCoupon) => {
     let couponFoodName = itemCoupon.item
-    let itemAmount = consolidatedCart[couponFoodName].count 
+    let itemAmount = cart[couponFoodName].count 
     let neededQuantitiy = itemCoupon.num
     let couponValues = {
-      price: 5, 
+      price: itemCoupon.cost, 
       count: 1, 
-      clearance: true
+      clearance: cart[couponFoodName].clearance
     }
     if (itemAmount >= neededQuantitiy){
-      Object.assign(consolidatedCart, {[`${couponFoodName} W/COUPON`]: couponValues})
-      consolidatedCart[couponFoodName].count = (itemAmount-neededQuantitiy)
+      Object.assign(cart, {[`${couponFoodName} W/COUPON`]: couponValues})
+      cart[couponFoodName].count = (itemAmount-neededQuantitiy)
     } 
   })
-  return consolidatedCart
+  return cart
 }
 
 
