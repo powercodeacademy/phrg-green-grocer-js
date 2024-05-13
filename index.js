@@ -1,36 +1,17 @@
-const cartArray = [
-  {"AVOCADO": {price: 3.0, clearance: true}},
-  {"AVOCADO": {price: 3.0, clearance: true}},
-  {"KALE": {price: 3.00, clearance: false}}
- ]
-
-let coupons = [
-  {item: "AVOCADO", num: 2, cost: 5.00}]
-
 const consolidateCart = (cart) => {
-  
   let newCart = {}
-  
-  
-  cart.forEach(item => {
-    
+  cart.forEach(item => {  
     const itemName = Object.keys(item)[0]
     if (itemName in newCart){
       newCart[itemName].count += 1
-    } else {
-      
+    } else {  
       let itemValues = Object.values(item)[0] 
-      
-      itemValues["count"] = 1
-            
+      itemValues["count"] = 1      
       newCart[Object.keys(item)[0]] = itemValues
     }
   })
   return newCart
- 
 }
-
-
 
 const applyCoupons = (cart, coupons) => {
  
@@ -51,32 +32,30 @@ const applyCoupons = (cart, coupons) => {
   return cart
 }
 
-
-
-
-
-
 const applyClearance = (cart) =>{
-  // code here
-  // check if it has clearance === true
-  // then apply 20% clearance to price and updates price
-  // else do nothing
   for (let item in cart){
     let itemPrice = cart[item].price 
     if (cart[item].clearance){
       itemPrice = itemPrice - (itemPrice * .20)
-      debugger
       cart[item].price = itemPrice
-      debugger
     }
   }
   return cart
 }
 
 const checkout = (cart, coupons) => {
-  // code here
+  let consolidatedCart  = consolidateCart(cart)
+  applyCoupons(consolidatedCart, coupons)
+  applyClearance(consolidatedCart)
+  let totalPrices = 0
+  for (let item in consolidatedCart){
+    if (consolidatedCart[item].count !== 0){
+    totalPrices += consolidatedCart[item].price
+    }
+  }
+  if (totalPrices > 100){
+    return totalPrices - (totalPrices * .10)
+  } else {
+    return totalPrices
+  }
 }
-
-const cart = consolidateCart(cartArray)
-//applyCoupons(cart, coupons)
-console.log(applyClearance(cart))
