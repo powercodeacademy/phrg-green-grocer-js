@@ -2,9 +2,10 @@ const cartArray = [
   {"AVOCADO": {price: 3.0, clearance: true}},
   {"AVOCADO": {price: 3.0, clearance: true}},
   {"KALE": {price: 3.0, clearance: false}},
- 
+ ]
 
-]
+let coupons = [
+  {item: "AVOCADO", num: 2, cost: 5.00}]
 
 const consolidateCart = (cart) => {
   
@@ -29,10 +30,35 @@ const consolidateCart = (cart) => {
  
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//cart = [{Avocado}, {Avocado}]
+//coupon = [{item: "AVOCADO", num: 2, cost: 5.00}]
+
+
 const applyCoupons = (cart, coupons) => {
-  // code here
+  // extract coupon from array
+  let enteredCoupon = {}
+
+  let food = coupons[0].item
+  enteredCoupon[food] = {}
+  //check if cart has enougt count for coupon.
+
+
+  //add coupon to cart
+  
+
+  //remove distcounted items from orginal item count
+  //check it item is on clearance
+  debugger
+  
+  
+  // Return [{food}]
+
 }
+
+
+
+
+
 
 const applyClearance = (cart) =>{
   // code here
@@ -43,4 +69,4 @@ const checkout = (cart, coupons) => {
 }
 
 consolidateCart(cartArray)
-
+applyCoupons(cartArray, coupons)
