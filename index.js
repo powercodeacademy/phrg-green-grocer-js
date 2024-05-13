@@ -1,6 +1,7 @@
 const cartArray = [
   {"AVOCADO": {price: 3.0, clearance: true}},
-  {"AVOCADO": {price: 3.0, clearance: true}}
+  {"AVOCADO": {price: 3.0, clearance: true}},
+  {"KALE": {price: 3.00, clearance: false}}
  ]
 
 let coupons = [
@@ -57,6 +58,19 @@ const applyCoupons = (cart, coupons) => {
 
 const applyClearance = (cart) =>{
   // code here
+  // check if it has clearance === true
+  // then apply 20% clearance to price and updates price
+  // else do nothing
+  for (let item in cart){
+    let itemPrice = cart[item].price 
+    if (cart[item].clearance){
+      itemPrice = itemPrice - (itemPrice * .20)
+      debugger
+      cart[item].price = itemPrice
+      debugger
+    }
+  }
+  return cart
 }
 
 const checkout = (cart, coupons) => {
@@ -64,4 +78,5 @@ const checkout = (cart, coupons) => {
 }
 
 const cart = consolidateCart(cartArray)
-applyCoupons(cart, coupons)
+//applyCoupons(cart, coupons)
+console.log(applyClearance(cart))
