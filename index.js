@@ -1,7 +1,6 @@
 const cartArray = [
   {"AVOCADO": {price: 3.0, clearance: true}},
-  {"AVOCADO": {price: 3.0, clearance: true}},
-  {"KALE": {price: 3.0, clearance: false}},
+  {"AVOCADO": {price: 3.0, clearance: true}}
  ]
 
 let coupons = [
@@ -30,41 +29,25 @@ const consolidateCart = (cart) => {
  
 }
 
-//cart = [{Avocado}, {Avocado}]
-//coupon = [{item: "AVOCADO", num: 2, cost: 5.00}]
 
 
-const applyCoupons = (consilidatedCart, coupons) => {
-  // newCart is a copy of cart where we are goin to add coupon too and return 
-  let newCart = {}
-  let couponFoodName = coupons[0].item
-  let itemAmount = consilidatedCart[0][couponFoodName].count 
-  let neededQuantitiy = coupons[0].num
-  //check if cart has enough count for coupon.
-  if (itemAmount >= neededQuantitiy){
-    //add coupon to cart and add the count of coupon
-    // it has to evaluate (cartAmount - num) and then make that the new count of the food in the cart
-    debugger
-    Object.assign(newCart, {[`${couponFoodName} W/Coupon`]: consilidatedCart[0][couponFoodName]})
-    debugger
-
-
-  } 
-  
-
-  //remove distcounted items from orginal item count
-  //check it item is on clearance
-  debugger
-  
-  
-  // Return [{food}]
-  // example return:
-  // {
-  //   "AVOCADO": {price: 3.0, clearance: true, count: 1},
-  //   "KALE": {price: 3.0, clearance: false, count: 1},
-  //   "AVOCADO W/COUPON": {price: 5.0, clearance: true, count: 1}
-  // }
-
+const applyCoupons = (cart, coupons) => {
+  let consolidatedCart = cart
+  coupons.forEach((itemCoupon) => {
+    let couponFoodName = itemCoupon.item
+    let itemAmount = consolidatedCart[couponFoodName].count 
+    let neededQuantitiy = itemCoupon.num
+    let couponValues = {
+      price: 5, 
+      count: 1, 
+      clearance: true
+    }
+    if (itemAmount >= neededQuantitiy){
+      Object.assign(consolidatedCart, {[`${couponFoodName} W/COUPON`]: couponValues})
+      consolidatedCart[couponFoodName].count = (itemAmount-neededQuantitiy)
+    } 
+  })
+  return consolidatedCart
 }
 
 
@@ -80,5 +63,5 @@ const checkout = (cart, coupons) => {
   // code here
 }
 
-consolidateCart(cartArray)
-applyCoupons(cartArray, coupons)
+const cart = consolidateCart(cartArray)
+applyCoupons(cart, coupons)
