@@ -34,16 +34,22 @@ const consolidateCart = (cart) => {
 //coupon = [{item: "AVOCADO", num: 2, cost: 5.00}]
 
 
-const applyCoupons = (cart, coupons) => {
-  // extract coupon from array
-  let enteredCoupon = {}
+const applyCoupons = (consilidatedCart, coupons) => {
+  // newCart is a copy of cart where we are goin to add coupon too and return 
+  let newCart = {}
+  let couponFoodName = coupons[0].item
+  let itemAmount = consilidatedCart[0][couponFoodName].count 
+  let neededQuantitiy = coupons[0].num
+  //check if cart has enough count for coupon.
+  if (itemAmount >= neededQuantitiy){
+    //add coupon to cart and add the count of coupon
+    // it has to evaluate (cartAmount - num) and then make that the new count of the food in the cart
+    debugger
+    Object.assign(newCart, {[`${couponFoodName} W/Coupon`]: consilidatedCart[0][couponFoodName]})
+    debugger
 
-  let food = coupons[0].item
-  enteredCoupon[food] = {}
-  //check if cart has enougt count for coupon.
 
-
-  //add coupon to cart
+  } 
   
 
   //remove distcounted items from orginal item count
@@ -52,6 +58,12 @@ const applyCoupons = (cart, coupons) => {
   
   
   // Return [{food}]
+  // example return:
+  // {
+  //   "AVOCADO": {price: 3.0, clearance: true, count: 1},
+  //   "KALE": {price: 3.0, clearance: false, count: 1},
+  //   "AVOCADO W/COUPON": {price: 5.0, clearance: true, count: 1}
+  // }
 
 }
 
