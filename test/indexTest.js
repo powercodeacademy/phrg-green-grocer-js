@@ -217,16 +217,6 @@ describe("Grocer", function () {
   })
 
   describe("#checkout", function () {
-    let sandbox
-
-    beforeEach(function () {
-      sandbox = sinon.createSandbox()
-    })
-
-    afterEach(function () {
-      sandbox.restore()
-    })
-
     it("calculates the total correctly", function () {
       const cart = [
         { AVOCADO: { price: 3.0, clearance: true } },
