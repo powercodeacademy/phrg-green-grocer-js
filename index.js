@@ -1,10 +1,3 @@
-const cart = [
-  { AVOCADO: { price: 3.0, clearance: true } },
-  { AVOCADO: { price: 3.0, clearance: true } },
-  { KALE: { price: 3.0, clearance: false } },
-]
-const couponsArr = [{ item: "AVOCADO", num: 2, cost: 5.0 }]
-
 const consolidateCart = (cart) => {
   const newCart = {}
 
@@ -66,10 +59,15 @@ const checkout = (cart, coupons) => {
   const consolidatedCart = consolidateCart(cart)
   const couponsApplied = applyCoupons(consolidatedCart, coupons)
   const clearanceApplied = applyClearance(couponsApplied)
+  let total = 0.0;
+  for (let item in clearanceApplied){
+    total += (clearanceApplied[item].price * clearanceApplied[item].count)
+  }
+  if (total > 100) {
+    total *= .9
+  }
 
+  total = Math.round(total * 10) / 10
+
+  return total
 }
-
-// console.log(consolidateCart(consoCart))
-// const freshCart = consolidateCart(items)
-// console.log(applyCoupons(freshCart, couponz))
-// console.log(applyClearance(consoCart))
